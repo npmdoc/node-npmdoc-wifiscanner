@@ -1,0 +1,253 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+    >wifiscanner (v1.0.1)</a>
+</h1>
+<h4>A simple Node.js WiFi Scanner</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.wifiscanner">module wifiscanner</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wifiscanner.wifiscanner">
+            function <span class="apidocSignatureSpan"></span>wifiscanner
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">wifiscanner.</span>common</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.wifiscanner.common">module wifiscanner.common</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wifiscanner.common.cleanCellLine">
+            function <span class="apidocSignatureSpan">wifiscanner.common.</span>cleanCellLine
+            <span class="apidocSignatureSpan">(cellLine)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wifiscanner.common.extractMac">
+            function <span class="apidocSignatureSpan">wifiscanner.common.</span>extractMac
+            <span class="apidocSignatureSpan">(line)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wifiscanner.common.findMac">
+            function <span class="apidocSignatureSpan">wifiscanner.common.</span>findMac
+            <span class="apidocSignatureSpan">(line)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.wifiscanner.common.parseCell">
+            function <span class="apidocSignatureSpan">wifiscanner.common.</span>parseCell
+            <span class="apidocSignatureSpan">(cell, cellLinesToJSON)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.wifiscanner" id="apidoc.module.wifiscanner">module wifiscanner</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.wifiscanner.wifiscanner" id="apidoc.element.wifiscanner.wifiscanner">
+        function <span class="apidocSignatureSpan"></span>wifiscanner
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function scanner(options) {
+    options = options || {}
+    const platform = platformSelect(options);
+    nconf.file(`${__dirname}/config/${platform}.json`);
+
+    let parser;
+    switch(platform) {
+        case &#x22;linux&#x22;:
+            parser = linuxparser;
+        break;
+        case &#x22;darwin&#x22;:
+            parser = darwinparser;
+        break;
+        case &#x22;win32&#x22;:
+            parser = windowsparser;
+        break;
+    }
+
+    const scannerOptions = {
+        binaryPath: options.binaryPath || nconf.get(&#x22;binaryPath&#x22;),
+        args: options.args || nconf.get(&#x22;args&#x22;),
+    }
+    return new WiFiScanner(scannerOptions, parser);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.wifiscanner.common" id="apidoc.module.wifiscanner.common">module wifiscanner.common</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.wifiscanner.common.cleanCellLine" id="apidoc.element.wifiscanner.common.cleanCellLine">
+        function <span class="apidocSignatureSpan">wifiscanner.common.</span>cleanCellLine
+        <span class="apidocSignatureSpan">(cellLine)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function cleanCellLine(cellLine) {
+    return cellLine.trim();
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.wifiscanner.common.extractMac" id="apidoc.element.wifiscanner.common.extractMac">
+        function <span class="apidocSignatureSpan">wifiscanner.common.</span>extractMac
+        <span class="apidocSignatureSpan">(line)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function extractMac(line) {
+    const macPattern = /([0-9A-F]{2}[:-]){5}([0-9A-F]{2})/ig;
+    return macPattern.exec(line.toLowerCase())[0];
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.wifiscanner.common.findMac" id="apidoc.element.wifiscanner.common.findMac">
+        function <span class="apidocSignatureSpan">wifiscanner.common.</span>findMac
+        <span class="apidocSignatureSpan">(line)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function findMac(line){
+    const macPattern = /([0-9A-F]{2}[:-]){5}([0-9A-F]{2})/ig;
+    return macPattern.test(line.toLowerCase());
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.wifiscanner.common.parseCell" id="apidoc.element.wifiscanner.common.parseCell">
+        function <span class="apidocSignatureSpan">wifiscanner.common.</span>parseCell
+        <span class="apidocSignatureSpan">(cell, cellLinesToJSON)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function parseCell(cell, cellLinesToJSON) {
+    const cellLines = cell.split(&#x22;\n&#x22;).map(cleanCellLine);
+    return cellLinesToJSON(cellLines);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+const common = require(&#x27;./common&#x27;);
+
+module.exports = function parse(data) {
+const cells = data.split(/Cell \d{2} - /g);
+if(~cells[0].toLocaleLowerCase().indexOf(&#x22;scan complete&#x22;)) {
+    cells.shift();
+}
+return cells.map(cell =&#x3e; common.<span class="apidocCodeKeywordSpan">parseCell</span>(cell,cellLinesToJSON));
+}
+
+function cellLinesToJSON(cellLines) {
+return {
+    ssid:       cellLines.filter(findSsid).map(extractSsid)[0],
+    mac:        cellLines.filter(common.findMac).map(common.extractMac)[0],
+    channel:    cellLines.filter(findChannel).map(extractChannel)[0],
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
